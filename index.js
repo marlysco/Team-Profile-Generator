@@ -109,7 +109,7 @@ class Employee {
 class Manager extends Employee {
     constructor(officeNumber, tittle, name, id, email){
     super("Manager", name, id, email);
-    this.officeNumber=answers.officeNumber;   
+    this.officeNumber=officeNumber;   
            }
     officeNumber(){
         return this.officeNumber;
@@ -120,7 +120,7 @@ class Manager extends Employee {
   class Engineer extends Employee {
   constructor(gitHub, tittle, name,id, email){
   super("Engineer", name, id, email);
-  this.gitHub=answers2.gitHub;       
+  this.gitHub=gitHub;       
     }
       gitHub(){
        return this.gitHub;
@@ -130,7 +130,7 @@ class Manager extends Employee {
 class Intern extends Employee {
     constructor(school, tittle, name,id, email){
     super("Intern", name, id, email);
-    this.school=answers3.school;  
+    this.school=school;  
     }
     school() {
         return this.school;
@@ -203,11 +203,65 @@ class Intern extends Employee {
     })
 }
 
-
 function printInfo() {
+    const html=`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Team</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        </head>
+    <body>
+        <header class=""></header>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">My Team</h1>   
+            </div>
+        </div>`
+
+    //Adding the collected information to the html page body
+    for(let i=0; i <= finalTeam.length; i++){
+        let member = `
+        <div class="member-card color:blue">
+            <div class="card-top">
+                <h2>${finalTeam[i].name}</h2>
+                <h2>${finalTeam[i].title}</h2>
+            </div>
+            <div class="card-bottom">
+                <p>Employee ID: ${finalTeam[i].id}</p>
+                <p>Email: ${finalTeam[i].email}</p>
+                <a id="email" href="mailto:${finalTeam[i].email}" class="btn btn-primary">Send email to ${finalTeam[i].name}</a>
+            <div>
+        ` 
+        if (finalTeam[i].school) {
+            const school=$("<p>");
+            school.val(finalTeam[i].school);
+            school.appendTo(".card-bottom");
+        }
+
+        if (finalTeam[i].officeNumber) {
+            const officenumber=$("<p>");
+            officenumber.val(finalTeam[i].officeNumber);
+            officenumber.appendTo(".card-bottom");
+        };
+
+        if (finalTeam[i].gitHub) {
+            const github=$("<p>");
+            github.val("GitHub:" + <a href="https://github.com/${finalTeam[i].gitHub}">${finalTeam[i].gitHub}</a>);
+            github.appendTo(".card-bottom");}
+    
+      console.log(member);
+      html.push(member);        
+    }  
+    
     fs.writeFile("myteam.html", html, function(error){
         if(error) {
             console.log(error)
         }
     })
+
+
 }
