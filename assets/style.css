@@ -1,0 +1,29 @@
+#header {
+    background-color: black;
+    width: 125%;
+    height: 15vh;
+    margin-left: -12%;
+    color:white;
+}
+
+#member {
+    border: black solid 5px;
+    margin-top: 5%;
+    font-weight: bolder;
+    margin-right: 10px;
+}
+
+#main {
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.card-top {
+    background-color: black;
+    color:white;
+    height: 100px;
+}
+
