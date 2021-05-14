@@ -107,7 +107,7 @@ class Employee {
 }
 //Manager class
 class Manager extends Employee {
-    constructor(officeNumber, tittle, name, id, email){
+    constructor(officeNumber, title, name, id, email){
     super("Manager", name, id, email);
     this.officeNumber=officeNumber;   
            }
@@ -118,7 +118,7 @@ class Manager extends Employee {
 
  //Engineer class
   class Engineer extends Employee {
-  constructor(gitHub, tittle, name,id, email){
+  constructor(gitHub, title, name,id, email){
   super("Engineer", name, id, email);
   this.gitHub=gitHub;       
     }
@@ -128,7 +128,7 @@ class Manager extends Employee {
      }
 //Intern class
 class Intern extends Employee {
-    constructor(school, tittle, name,id, email){
+    constructor(school, title, name,id, email){
     super("Intern", name, id, email);
     this.school=school;  
     }
@@ -147,6 +147,7 @@ class Intern extends Employee {
         console.log(teamMaker)
         //Adding the member to the team array
         finalTeam.push(teamMaker)
+        console.log(finalTeam)
         //Ask for the next member of finish the team
         addMember();
     })
@@ -187,6 +188,7 @@ class Intern extends Employee {
            console.log(engineer)
            //Adding the member to the team array
            finalTeam.push(engineer),
+           console.log(finalTeam)
            addMember();             
     })
 }
@@ -199,11 +201,13 @@ class Intern extends Employee {
        console.log(intern);
        //Adding the member to the team array
        finalTeam.push(intern)
+       console.log(finalTeam)
        addMember();
     })
 }
 
 function printInfo() {
+    const myteam=[]
     const html=`<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -221,14 +225,14 @@ function printInfo() {
                 <h1 class="text-center">My Team</h1>   
             </div>
         </div>`
-
+    myteam.push(html)
     //Adding the collected information to the html page body
     for(let i=0; i <= finalTeam.length; i++){
         let member = `
         <div class="member-card color:blue">
             <div class="card-top">
-                <h2>${finalTeam[i].name}</h2>
-                <h2>${finalTeam[i].title}</h2>
+             <h2>${finalTeam[i].title}</h2>
+             <h2>${finalTeam[i].name}</h2>  
             </div>
             <div class="card-bottom">
                 <p>Employee ID: ${finalTeam[i].id}</p>
@@ -237,31 +241,26 @@ function printInfo() {
             <div>
         ` 
         if (finalTeam[i].school) {
-            const school=$("<p>");
-            school.val(finalTeam[i].school);
-            school.appendTo(".card-bottom");
-        }
+            member+=`<p>School: ${(finalTeam[i].school)}</p>`
+        };
 
         if (finalTeam[i].officeNumber) {
-            const officenumber=$("<p>");
-            officenumber.val(finalTeam[i].officeNumber);
-            officenumber.appendTo(".card-bottom");
+            member+=`<p>Office Number: ${(finalTeam[i].officeNumber)}</p>`
         };
 
         if (finalTeam[i].gitHub) {
-            const github=$("<p>");
-            github.val("GitHub:" + <a href="https://github.com/${finalTeam[i].gitHub}">${finalTeam[i].gitHub}</a>);
-            github.appendTo(".card-bottom");}
-    
-      console.log(member);
-      html.push(member);        
-    }  
-    
-    fs.writeFile("myteam.html", html, function(error){
-        if(error) {
-            console.log(error)
+            member+=`<p>GitHub: <a href="https://github.com/${finalTeam[i].gitHub}">${finalTeam[i].gitHub}</a></p>`
+           } 
+
+        myteam.push(member) 
         }
-    })
+  
 
-
+        fs.writeFile ("myteam.html", myteam, function(error){
+            if(error) {
+                console.log(error)
+            }
+        })
 }
+    
+     
