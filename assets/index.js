@@ -105,6 +105,9 @@ class Employee {
         return this.email;
     };
 }
+
+module.exports = Employee
+
 //Manager class
 class Manager extends Employee {
     constructor(officeNumber, title, name, id, email){
@@ -136,7 +139,10 @@ class Intern extends Employee {
         return this.school;
     }
    }
-
+   
+   module.exports = Manager;
+   module.exports = Engineer;
+   module.exports = Intern;
 
      function init() {
     console.log("Welcome to the command-line team builder application!!")
